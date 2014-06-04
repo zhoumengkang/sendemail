@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#progress").append('<div>页面打开时间'+new Date().toLocaleString()+'</div>');
+			var page = 0;
+			var send = setInterval(function(){
+				$.ajax({
+				  type:"POST",
+				  url: "send.php",
+				  data: {page:page},
+				  async: false,
+				  dataType: 'json',
+				  success:function(data){
+				  		//console.log(data);  		
+				  		page++;
+				  		$("#progress").append('<div><b>'+ new Date().toLocaleString()+'</b></div><div>发送到第'+page+'封：'+data.info+'</div>');
+				  		if(data.flag){
+				  			clearInterval(send);
+				  			$("#progress").append('<p style="color: red;font-weight: 800;">发送完毕</p>');
+				  		}
+				  }
+				});	
+			},12000);
+		})
+		
+		
+	</script>
+</head>
+<body>
+	<div id="progress"></div>
+</body>
+</html>
