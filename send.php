@@ -22,7 +22,7 @@ if(intval($totalNum) - intval($page) <2){
 
 $num = 1;
 $start = 0 + ($num*$page);
-$sql = "select `id`,`email`,`name` from `test` order by id asc limit {$start} , {$num}";
+$sql = "select `id`,`email`,`name` from `contact` order by id asc limit {$start} , {$num}";
 $result = mysql_query($sql); 
 
 //导入配置
@@ -41,8 +41,8 @@ while($row = mysql_fetch_assoc($result)){
     
     echo json_encode($data);
     //数据库里做标记
-    $sql = "INSERT INTO `mark` (`uid`) VALUES (".$row['id'].")";
-    mysql_query($sql);
+    //$sql = "INSERT INTO `mark` (`uid`) VALUES (".$row['id'].")";
+    //mysql_query($sql);
 }
 
 mysql_close($con);
